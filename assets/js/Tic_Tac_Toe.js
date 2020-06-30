@@ -107,6 +107,10 @@ for(let i = 0;i<squares.length;i++)
     });
 }
 
+function botChoice(){
+    console.log((Math.floor(Math.random() * 9) + 1));
+}
+
 function changePlayer(){
     player = (player % 2) ? 2 : 1;
     $("#player-one").toggleClass("selected");
