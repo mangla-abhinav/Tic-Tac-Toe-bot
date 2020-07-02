@@ -5,7 +5,9 @@ var player = 1;
 var gameStatus = -1;
 var character;
 var validity;
-var githubIcon = $('<i class="fab fa-github black"></i>');
+var selectedDiv;
+var githubIcon = '<i class="fab fa-github black"></i>';
+var bugIcon = '<i class="fas fa-bug sample blue"></i>';
 
 var dw = $('.square').width();
 $('.square').css({
@@ -78,6 +80,7 @@ for(let i = 0;i<squares.length;i++)
             if(validity)
             {
                 document.querySelector("#answer").textContent = "";
+                selectedDiv = $(this);
                 markSquare(i);
     
             gameStatus = checkForWin();
@@ -112,16 +115,16 @@ function markSquare(num)
 {
     if(mode === "developer"){
         if(player == 1)
-    $(".square")[num].append(githubIcon);
+    selectedDiv.append(githubIcon);
     else if(player == 2)
-    $(".square")[num].append("<i class='fas fa-bug blue'></i>");
+    selectedDiv.append("<i class='fas fa-bug sample blue'></i>");
     }
 
     else if(mode === "normal"){
         if(player == 1)
-    $(".square")[num].append("<i class='far fa-circle black'></i>");
+    selectedDiv.append("<i class='far fa-circle black'></i>");
     else if(player == 2)
-    $(".square")[num].append("<i class='fas fa-times-circle blue'></i>");
+    selectedDiv.append("<i class='fas fa-times-circle blue'></i>");
     }
 }
 
