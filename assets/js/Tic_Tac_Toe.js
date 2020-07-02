@@ -5,6 +5,7 @@ var player = 1;
 var gameStatus = -1;
 var character;
 var validity;
+var githubIcon = $('<i class="fab fa-github black"></i>');
 
 var dw = $('.square').width();
 $('.square').css({
@@ -71,25 +72,13 @@ for(let i = 0;i<squares.length;i++)
     {
         if(gameStatus === -1)
         {
-            character = (player === 1) ? 'O' : 'X';
+            chooseCharacter();
             choice = i + 1;
-            validity = markBoard(character);
+            checkValidityAndMarkCharacter();
             if(validity)
             {
                 document.querySelector("#answer").textContent = "";
-            if(mode === "developer"){
-                if(player == 1)
-            $(this).append("<i class='fab fa-github black'></i>");
-            else if(player == 2)
-            $(this).append("<i class='fas fa-bug blue'></i>");
-            }
-    
-            else if(mode === "normal"){
-                if(player == 1)
-            $(this).append("<i class='far fa-circle black'></i>");
-            else if(player == 2)
-            $(this).append("<i class='fas fa-times-circle blue'></i>");
-            }
+                markSquare(i);
     
             gameStatus = checkForWin();
     
@@ -102,13 +91,38 @@ for(let i = 0;i<squares.length;i++)
                 document.querySelector("#answer").textContent = "Player " + player + " Wins" ;
             }
             changePlayer();
-        }
+            }
         }
     });
 }
 
 function botChoice(){
     console.log((Math.floor(Math.random() * 9) + 1));
+}
+
+function chooseCharacter(){
+    character = (player === 1) ? 'O' : 'X';
+}
+
+function checkValidityAndMarkCharacter(){
+    validity = markBoard(character);
+}
+
+function markSquare(num)
+{
+    if(mode === "developer"){
+        if(player == 1)
+    $(".square")[num].append(githubIcon);
+    else if(player == 2)
+    $(".square")[num].append("<i class='fas fa-bug blue'></i>");
+    }
+
+    else if(mode === "normal"){
+        if(player == 1)
+    $(".square")[num].append("<i class='far fa-circle black'></i>");
+    else if(player == 2)
+    $(".square")[num].append("<i class='fas fa-times-circle blue'></i>");
+    }
 }
 
 function changePlayer(){
@@ -176,10 +190,6 @@ function markBoard(mark)
         return 1;
     }
 
-    else if(gameStatus === 0)
-    {
-        document.querySelector("#answer").textContent = "GAME DRAW";
-    }
     else
     {
         document.querySelector("#answer").textContent = "INVALID MOVE";
