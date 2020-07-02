@@ -6,8 +6,10 @@ var gameStatus = -1;
 var character;
 var validity;
 var selectedDiv;
-var githubIcon = '<i class="fab fa-github black"></i>';
-var bugIcon = '<i class="fas fa-bug blue"></i>';
+var githubIcon = "<i class='fab fa-github black'></i>";
+var bugIcon = "<i class='fas fa-bug blue'></i>";
+var circleIcon = "<i class='far fa-circle black'></i>";
+var crossIcon = "<i class='fas fa-times-circle blue'></i>";
 
 var dw = $('.square').width();
 $('.square').css({
@@ -74,27 +76,9 @@ for(let i = 0;i<squares.length;i++)
     {
         if(gameStatus === -1)
         {
-            chooseCharacter();
-            choice = i + 1;
-            checkValidityAndMarkCharacter();
-            if(validity)
-            {
-                document.querySelector("#answer").textContent = "";
-                selectedDiv = $(this);
-                markSquare(i);
-    
-            gameStatus = checkForWin();
-    
-            if(gameStatus === 0)
-            {
-                document.querySelector("#answer").textContent = "GAME DRAW";
-            }
-            else if(gameStatus === 1)
-            {
-                document.querySelector("#answer").textContent = "Player " + player + " Wins" ;
-            }
+            selectedDiv = $(this);
+            runGame(i);
             changePlayer();
-            }
         }
     });
 }
@@ -122,9 +106,34 @@ function markSquare(num)
 
     else if(mode === "normal"){
         if(player == 1)
-    selectedDiv.append("<i class='far fa-circle black'></i>");
+    selectedDiv.append(circleIcon);
     else if(player == 2)
-    selectedDiv.append("<i class='fas fa-times-circle blue'></i>");
+    selectedDiv.append(crossIcon);
+    }
+}
+
+function checkForGameEnd(){
+    if(gameStatus === 0)
+    {
+        document.querySelector("#answer").textContent = "GAME DRAW";
+    }
+    else if(gameStatus === 1)
+    {
+        document.querySelector("#answer").textContent = "Player " + player + " Wins" ;
+    }
+}
+
+function runGame(num){
+    chooseCharacter();
+    choice = num + 1;
+    checkValidityAndMarkCharacter();
+    if(validity)
+    {
+        document.querySelector("#answer").textContent = "";
+        markSquare(num);
+
+    gameStatus = checkForWin();
+    checkForGameEnd();            
     }
 }
 
