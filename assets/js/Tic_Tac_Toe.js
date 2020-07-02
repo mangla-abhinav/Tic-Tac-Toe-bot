@@ -7,7 +7,7 @@ var character;
 var validity;
 var selectedDiv;
 var githubIcon = '<i class="fab fa-github black"></i>';
-var bugIcon = '<i class="fas fa-bug sample blue"></i>';
+var bugIcon = '<i class="fas fa-bug blue"></i>';
 
 var dw = $('.square').width();
 $('.square').css({
@@ -117,7 +117,7 @@ function markSquare(num)
         if(player == 1)
     selectedDiv.append(githubIcon);
     else if(player == 2)
-    selectedDiv.append("<i class='fas fa-bug sample blue'></i>");
+    selectedDiv.append(bugIcon);
     }
 
     else if(mode === "normal"){
