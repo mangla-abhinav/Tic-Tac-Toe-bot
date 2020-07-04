@@ -5,6 +5,7 @@ var player = 1;
 var gameStatus = -1;
 var character;
 var validity;
+var botMark;
 var selectedDiv;
 var githubIcon = "<i class='fab fa-github black'></i>";
 var bugIcon = "<i class='fas fa-bug blue'></i>";
@@ -79,12 +80,40 @@ for(let i = 0;i<squares.length;i++)
             selectedDiv = $(this);
             runGame(i);
             changePlayer();
+            // document.querySelector("#answer").textContent = "Thinking";
+            // sleep(2500);
+            // botTurn();
+            // changePlayer();
         }
     });
 }
 
+function botTurn()
+{
+    chooseCharacter();
+    choice = botChoice();
+    botMark = choice - 1;
+    checkValidityAndMarkCharacter();
+    if(validity)
+    {
+        document.querySelector("#answer").textContent = "";
+        markSquare(botMark);
+
+    gameStatus = checkForWin();
+    checkForGameEnd();            
+    }
+}
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
 function botChoice(){
-    console.log((Math.floor(Math.random() * 9) + 1));
+    return ((Math.floor(Math.random() * 9) + 1));
 }
 
 function chooseCharacter(){
