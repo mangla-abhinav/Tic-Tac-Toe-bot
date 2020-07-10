@@ -7,6 +7,7 @@ var character;
 var validity;
 var botMark;
 var selectedDiv;
+var random;
 var githubIcon = "<i class='fab fa-github black'></i>";
 var bugIcon = "<i class='fas fa-bug blue'></i>";
 var circleIcon = "<i class='far fa-circle black'></i>";
@@ -80,10 +81,11 @@ for(let i = 0;i<squares.length;i++)
             selectedDiv = $(this);
             runGame(i);
             changePlayer();
-            // document.querySelector("#answer").textContent = "Thinking";
+            document.querySelector("#answer").textContent = "Thinking";
             // sleep(2500);
-            // botTurn();
-            // changePlayer();
+            botTurn();
+            // sleep(2500);
+            changePlayer();
         }
     });
 }
@@ -93,6 +95,7 @@ function botTurn()
     chooseCharacter();
     choice = botChoice();
     botMark = choice - 1;
+    selectedDiv = $(".square")[botMark];
     checkValidityAndMarkCharacter();
     if(validity)
     {
@@ -113,7 +116,10 @@ function sleep(milliseconds) {
   }
 
 function botChoice(){
-    return ((Math.floor(Math.random() * 9) + 1));
+    random = (Math.floor(Math.random() * 9) + 1);
+    random = (Math.floor(Math.random() * 9) + 1);
+    random = (Math.floor(Math.random() * 9) + 1);
+    return random;
 }
 
 function chooseCharacter(){
