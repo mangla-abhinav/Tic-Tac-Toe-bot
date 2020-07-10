@@ -81,6 +81,9 @@ for(let i = 0;i<squares.length;i++)
             selectedDiv = $(this);
             runGame(i);
             changePlayer();
+        }
+        if(gameStatus ===-1)
+        {
             document.querySelector("#answer").textContent = "Thinking";
             // sleep(2500);
             botTurn();
@@ -158,6 +161,11 @@ function checkForGameEnd(){
     else if(gameStatus === 1)
     {
         document.querySelector("#answer").textContent = "Player " + player + " Wins" ;
+
+        for(var j = 0; j < square.length; j++)
+        {
+            square[j] = character;
+        }
     }
 }
 
