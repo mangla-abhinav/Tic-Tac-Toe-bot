@@ -93,9 +93,12 @@ for(let i = 0;i<squares.length;i++)
 function botTurn()
 {
     chooseCharacter();
-    choice = botChoice();
+    do{
+        choice = botChoice();
+    }
+    while(square[choice] === "O" || square[choice] === "X" );
     botMark = choice - 1;
-    selectedDiv = $(".square")[botMark];
+    selectedDiv = $(".square").eq(botMark);
     checkValidityAndMarkCharacter();
     if(validity)
     {
@@ -134,9 +137,9 @@ function markSquare(num)
 {
     if(mode === "developer"){
         if(player == 1)
-    selectedDiv.append(githubIcon);
-    else if(player == 2)
-    selectedDiv.append(bugIcon);
+        selectedDiv.append(githubIcon);
+        else if(player == 2)
+        selectedDiv.append(bugIcon);
     }
 
     else if(mode === "normal"){
