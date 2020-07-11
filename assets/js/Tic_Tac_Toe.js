@@ -44,7 +44,7 @@ $("#developer").on("click", function () {
     removeIcons();
     $("#player-one").addClass("selected");
     $("#player-two").removeClass("selected");
-    document.querySelector("#answer").textContent = "";
+    $("#answer").text("");
 });
 
 $("#normal").on("click", function () {
@@ -69,7 +69,7 @@ function reset(){
     $("#player-two").removeClass("selected");
     removeIcons();
     square = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ];
-    document.querySelector("#answer").textContent = "";
+    $("#answer").text("");
 };
 
 for(let i = 0;i<squares.length;i++)
@@ -78,14 +78,14 @@ for(let i = 0;i<squares.length;i++)
     {
         if(gameStatus === -1)
         {
-            document.querySelector("#answer").textContent = "";
+            $("#answer").text("");
             selectedDiv = $(this);
             runGame(i);
-            changePlayer();
         }
-        if(gameStatus ===-1)
+        if(gameStatus ===-1 && validity!== 0)
         {
-            document.querySelector("#answer").textContent = "Thinking";
+            changePlayer();
+            $("#answer").text("Thinking");
             setTimeout(botTurn,1000);
             console.log("Bot Run");
             setTimeout(changePlayer,1000);
@@ -107,7 +107,7 @@ function botTurn()
     checkValidityAndMarkCharacter();
     if(validity)
     {
-        document.querySelector("#answer").textContent = "";
+        $("#answer").text("");
         markSquare(botMark);
 
     gameStatus = checkForWin();
@@ -150,11 +150,11 @@ function markSquare(num)
 function checkForGameEnd(){
     if(gameStatus === 0)
     {
-        document.querySelector("#answer").textContent = "GAME DRAW";
+        $("#answer").text("GAME DRAW");
     }
     else if(gameStatus === 1)
     {
-        document.querySelector("#answer").textContent = "Player " + player + " Wins" ;
+        $("#answer").text("Player " + player + " Wins");
 
         for(var j = 0; j < square.length; j++)
         {
@@ -169,7 +169,7 @@ function runGame(num){
     checkValidityAndMarkCharacter();
     if(validity)
     {
-        document.querySelector("#answer").textContent = "";
+        $("#answer").text("");
         markSquare(num);
 
     gameStatus = checkForWin();
@@ -244,7 +244,7 @@ function markBoard(mark)
 
     else
     {
-        document.querySelector("#answer").textContent = "INVALID MOVE";
+        $("#answer").text("INVALID MOVE");
         return 0;
     }
 }
