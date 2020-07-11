@@ -87,16 +87,13 @@ for(let i = 0;i<squares.length;i++)
             changePlayer();
             $("#answer").text("Thinking");
             setTimeout(botTurn,1000);
-            console.log("Bot Run");
             setTimeout(changePlayer,1000);
-            console.log("Player Changed");
         }
     });
 }
 
 function botTurn()
 {
-    console.log("Bot Running");
     chooseCharacter();
     do{
         choice = botChoice();
