@@ -78,6 +78,7 @@ for(let i = 0;i<squares.length;i++)
     {
         if(gameStatus === -1)
         {
+            document.querySelector("#answer").textContent = "";
             selectedDiv = $(this);
             runGame(i);
             changePlayer();
@@ -85,16 +86,17 @@ for(let i = 0;i<squares.length;i++)
         if(gameStatus ===-1)
         {
             document.querySelector("#answer").textContent = "Thinking";
-            // sleep(2500);
-            botTurn();
-            // sleep(2500);
-            changePlayer();
+            setTimeout(botTurn,1000);
+            console.log("Bot Run");
+            setTimeout(changePlayer,1000);
+            console.log("Player Changed");
         }
     });
 }
 
 function botTurn()
 {
+    console.log("Bot Running");
     chooseCharacter();
     do{
         choice = botChoice();
@@ -112,14 +114,6 @@ function botTurn()
     checkForGameEnd();            
     }
 }
-
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
 
 function botChoice(){
     random = (Math.floor(Math.random() * 9) + 1);
